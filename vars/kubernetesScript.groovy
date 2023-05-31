@@ -45,7 +45,7 @@ environment {
 			steps {
 				//sh 'kubectl set image deploy webapp-deployment nodejs="$registry:$dockerTag" --record'
 		checkout([$class: 'GitSCM', branches: [[name: "$gitBranch"]], extensions: [], userRemoteConfigs: [[credentialsId: "$gitCredId", url: "$gitRepo"]]])
-		 sh   'kubectl apply -f manifest.yml –record’
+		 sh   'kubectl apply -f manifest.yml --record'
 			}
 		}
 	}
