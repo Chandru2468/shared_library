@@ -43,7 +43,9 @@ environment {
 		stage('DEPLOY IMAGE') {
       			agent{label 'kubernetes'}
 			steps {
-				sh 'kubectl set image deploy webapp-deployment nodejs="$registry:$dockerTag" --record'
+				//sh 'kubectl set image deploy webapp-deployment nodejs="$registry:$dockerTag" --record'
+		checkout scmGit(branches: [[name: “$gitBranch”]], extensions: [], userRemoteConfigs: [[credentialsId: “$gitCredID”, url: “$gitRepo”]])
+		 sh   'kubectl apply -f manifest.yml –record’
 			}
 		}
 	}
